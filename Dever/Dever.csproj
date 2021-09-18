@@ -92,6 +92,7 @@
     <Reference Include="Zstandard.Net">
       <HintPath>..\packages\MySql.Data.8.0.26\lib\netstandard2.1\Zstandard.Net.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />

@@ -37,7 +37,7 @@ namespace Dever
 		partial void clearSearch (Foundation.NSObject sender);
 
 		[Action ("deleteButton:")]
-		partial void deleteButton (Foundation.NSObject sender);
+		partial void DeleteButton (Foundation.NSObject sender);
 
 		[Action ("saveButton:")]
 		partial void saveButton (Foundation.NSObject sender);

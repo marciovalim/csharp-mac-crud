@@ -1,4 +1,5 @@
-﻿using AppKit;
+﻿using System;
+using AppKit;
 
 namespace Dever
 {
@@ -6,8 +7,9 @@ namespace Dever
     {
         static void Main(string[] args)
         {
-            NSApplication.Init();
-            NSApplication.Main(args);
+                Database.CreateTable();
+                NSApplication.Init();
+                NSApplication.Main(args);
         }
     }
 }

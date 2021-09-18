@@ -32,12 +32,8 @@ namespace Dever
             }
         }
 
-        private List<Student>  students = new List<Student>() {
-            new Student(0, "marcio", "marcio pai", "alessandra", 0, "20/03/2004", "m"),
-            new Student(1, "iago", "alexandre", "monica", 2, "15/03/2004", "m"),
-        };
 
-        partial void clearSearch(Foundation.NSObject sender)
+        partial void clearSearch(NSObject sender)
         {
             nameResLabel.StringValue = "";
             fatherNameResLabel.StringValue = "";
@@ -48,7 +44,7 @@ namespace Dever
             searchTextField.StringValue = "";
         }
 
-        partial void search(Foundation.NSObject sender)
+        partial void search(NSObject sender)
         {
             var student = searchStudentById(searchTextField.StringValue);
 
@@ -68,7 +64,7 @@ namespace Dever
             
         }
 
-        partial void saveButton(Foundation.NSObject sender)
+        partial void saveButton(NSObject sender)
         {
             if (nameResLabel.StringValue == ""||
                 fatherNameResLabel.StringValue == "" ||
@@ -86,15 +82,16 @@ namespace Dever
             int.TryParse(searchTextField.StringValue, out int id);
              
 
-            var studentData = new Student(
-                isNewStudent ?  students.Count : id,
-                nameResLabel.StringValue,
-                fatherNameResLabel.StringValue,
-                motherNameResLabel.StringValue,
-                int.Parse(brotherCountResLabel.StringValue),
-                birthdateResLabel.StringValue,
-                sexResLabel.StringValue
-             );
+            var studentData = new Student
+            {
+                id = isNewStudent ? -1 : id,
+                name = nameResLabel.StringValue,
+                fatherName = fatherNameResLabel.StringValue,
+                motherName = motherNameResLabel.StringValue,
+                brothersCount = int.Parse(brotherCountResLabel.StringValue),
+                birthdate = birthdateResLabel.StringValue,
+                sex = sexResLabel.StringValue
+            };
 
 
             
@@ -111,14 +108,13 @@ namespace Dever
             clearSearch(null);
         }
 
-        partial void deleteButton(Foundation.NSObject sender)
+        partial void DeleteButton(Foundation.NSObject sender)
         {
             if (searchTextField.StringValue == "") return;
 
-            var student = searchStudentById(searchTextField.StringValue);
-            if (student == null) return;
+            
 
-            deleteStudent(student);
+            deleteStudent(searchTextField.StringValue);
             clearSearch(null);
         }
 
@@ -126,29 +122,22 @@ namespace Dever
 
         private Student searchStudentById(string id)
         {
-            // TODO: implement db
-            return students.Find(x => x.id.ToString() == id);
+            return Database.SelectById(id);
         }
 
         private void addStudent(Student student)
         {
-            // TODO: implement db
-            students.Add(student);
-
+            Database.Insert(student);
         }
 
         private void updateStudent(Student student)
         {
-            // TODO: implement db
-            var index = students.FindIndex(x => x.id == student.id);
-            students[index] = student;
-
+            Database.Update(student);
         }
 
-        private void deleteStudent(Student student)
+        private void deleteStudent(string id)
         {
-            // TODO: implement db
-            students.RemoveAll(x => x.id == student.id);
+            Database.DeleteById(id.ToString());
         }
 
     }
