@@ -33,8 +33,8 @@ namespace Dever
         }
 
         private List<Student>  students = new List<Student>() {
-            new Student(23, "marcio", "marcio pai", "alessandra", 0, "20/03/2004", "m"),
-            new Student(89, "iago", "alexandre", "monica", 2, "15/03/2004", "m"),
+            new Student(0, "marcio", "marcio pai", "alessandra", 0, "20/03/2004", "m"),
+            new Student(1, "iago", "alexandre", "monica", 2, "15/03/2004", "m"),
         };
 
         partial void clearSearch(Foundation.NSObject sender)
@@ -87,7 +87,7 @@ namespace Dever
              
 
             var studentData = new Student(
-                isNewStudent ?  9 : id,
+                isNewStudent ?  students.Count : id,
                 nameResLabel.StringValue,
                 fatherNameResLabel.StringValue,
                 motherNameResLabel.StringValue,
